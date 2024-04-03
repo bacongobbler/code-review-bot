@@ -4,7 +4,7 @@ This repository demonstrates how you can receive code reviews from OpenAI using 
 
 The code review is done by performing the following:
 
-1. Fetch the diff of the pull request using [`GrantBirki/git-diff-action`](https://github.com/GrantBirki/git-diff-action)
+1. Fetch the diff of the pull request
 2. Send the diff to OpenAI for review using the OpenAI API
 3. Capture the response and add it as a comment to the pull request
 

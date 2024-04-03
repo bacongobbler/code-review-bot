@@ -18,17 +18,20 @@ jobs:
           fetch-depth: 0
 
       - name: Get the PR diff
-        uses: GrantBirki/git-diff-action@v2.6.0
-        id: git-diff
+        uses: actions/github-script@v7
+        id: diff
         with:
-          raw_diff_file_output: diff.txt
-          file_output_only: "true"
+          result-encoding: string
+          script: |
+            const diff_url = context.payload.pull_request.diff_url
+            const result = await github.request(diff_url)
+            return result.data
 
       - name: Review code
         id: code-review
         run: |
           # Get the diff
-          escaped_diff=$(cat ${{ steps.git-diff.outputs.raw-diff-path }} | jq -sRr @json | sed -e 's/^"//' -e 's/"$//')
+          escaped_diff=$(cat ${{ steps.diff.outputs.raw-diff-path }} | jq -sRr @json | sed -e 's/^"//' -e 's/"$//')
 
           # Send to OpenAI for review
           response=$(curl -X POST https://api.openai.com/v1/chat/completions \
