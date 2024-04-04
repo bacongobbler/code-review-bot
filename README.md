@@ -8,6 +8,8 @@ The code review is done by performing the following:
 2. Send the diff to OpenAI for review using the OpenAI API
 3. Capture the response and add it as a comment to the pull request
 
+See https://github.com/bacongobbler/code-review-bot/pull/1 for an example.
+
 ## Setup
 
 1. Create an OpenAI account and get an API key
